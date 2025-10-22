@@ -4,6 +4,14 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 `tbl2.tsv`. En este laboratorio solo puede utilizar las funciones y 
 librerias de pandas para resolver las preguntas.
 """
+import pandas as pd
+
+
+def formato(data):
+    lista = data.to_list()
+    lista.sort()
+    
+    return ":".join(str(elemento) for elemento in lista)
 
 
 def pregunta_10():
@@ -20,3 +28,8 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+    tbl0 = pd.read_csv("files/input/tbl0.tsv", sep="\t")
+
+    tabla = tbl0.pivot_table(values="c2", index="c1", aggfunc=formato)
+
+    return tabla
